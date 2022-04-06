@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.Study.Week11_Apr1st;
 
 import java.io.BufferedReader;
 import java.io.IOException;
