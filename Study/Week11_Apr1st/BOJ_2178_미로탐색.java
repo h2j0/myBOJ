@@ -65,8 +65,8 @@ public class BOJ_2178_미로탐색 {
 					continue;
 
 				visited[nr][nc] = true;
-				q.add(new Pos(nr, nc, curr.dist+1));
-//				q.add(new Pos(nr, nc, ++curr.dist)); 이건 1%에서 틀렸습니다 나옴
+				q.add(new Pos(nr, nc, curr.dist+1)); //정답 
+//				q.add(new Pos(nr, nc, ++curr.dist)); //이건 1%에서 틀렸습니다 나옴
 				// 4방향을 돌면서 증가되고 있었다?? 
 				// help................................
 				// 사실 이해가 잘 안감 ㅎ,ㅎ,ㅎ,ㅎ,,ㅎㅎ,
