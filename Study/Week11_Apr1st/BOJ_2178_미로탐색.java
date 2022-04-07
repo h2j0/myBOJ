@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.Study.Week11_Apr1st;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +34,9 @@ public class BOJ_2178_미로탐색 {
 			maze[i] = br.readLine().toCharArray();
 		} // 입력 완
 
+//		int dist=0;
 		int ansDist = 0;
+		
 		Pos start = new Pos(0, 0, 1);
 
 		boolean[][] visited = new boolean[n][m];
@@ -42,14 +44,14 @@ public class BOJ_2178_미로탐색 {
 		// 큐 생성
 		Queue<Pos> q = new LinkedList<>();
 
-		q.add(start);
 		visited[start.r][start.c] = true;
+		q.add(start);
 
 		while (!q.isEmpty()) {
 			Pos curr = q.poll();
 
 			if (curr.r == n-1 && curr.c == m-1) {
-				ansDist = curr.dist;
+					ansDist = curr.dist;
 				break;
 			}
 
@@ -63,7 +65,13 @@ public class BOJ_2178_미로탐색 {
 					continue;
 
 				visited[nr][nc] = true;
-				q.add(new Pos(nr, nc, ++curr.dist));
+				q.add(new Pos(nr, nc, curr.dist+1));
+//				q.add(new Pos(nr, nc, ++curr.dist)); 이건 1%에서 틀렸습니다 나옴
+				// 4방향을 돌면서 증가되고 있었다?? 
+				// help................................
+				// 사실 이해가 잘 안감 ㅎ,ㅎ,ㅎ,ㅎ,,ㅎㅎ,
+				// 
+				// 
 			} // 4방향 탐색
 		} // bfs while
 
