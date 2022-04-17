@@ -1,4 +1,4 @@
-package BOJ;
+package BOJ.Study.Week12_Apr2nd;
 import java.util.Arrays;
 import java.util.Scanner;
 
