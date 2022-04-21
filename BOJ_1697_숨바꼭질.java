@@ -21,7 +21,7 @@ public class BOJ_1697_숨바꼭질 {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int K = sc.nextInt();
-		visited = new boolean[100001];
+		visited = new boolean[200001];
 
 		Pos st = new Pos(N, 0);
 
