@@ -1,58 +1,84 @@
 package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class BOJ_토마토 {
 
 	static class Tomato {
-		int r, c;
+		int r;
+		int c;
+		int day;
 
-		public Tomato(int r, int c) {
+		public Tomato(int r, int c, int day) {
 			this.r = r;
 			this.c = c;
+			this.day = day;
 		}
 	}
 
-	static int N, M;
 	static int[] dr = { -1, 1, 0, 0 };
 	static int[] dc = { 0, 0, -1, 1 };
+	static int M;
+	static int N;
+	static int[][] box;
+	static Queue<Tomato> q;
+	static boolean[][] visited;
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		M = sc.nextInt();
-		N = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int M = Integer.parseInt(st.nextToken());
+		int N = Integer.parseInt(st.nextToken());
 
-		int[][] box = new int[N][M];
-
-		int empty = N * M;// box에 담을 수 있는 토마토의 총량
-
-		Queue<Tomato> q = new LinkedList<>();
-
+		q = new LinkedList<>();
+		visited = new boolean[N][M];
+		box = new int[N][M];
 		for (int i = 0; i < N; i++) {
+			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < M; j++) {
-				box[i][j] = sc.nextInt();
-				// 입력으로는 0 or 1 or -1
-
-//				if (box[i][j] != 0)
-//					empty--;
-//				if (box[i][j] == 1)
-//					q.add(new Tomato(i, j));
-
-				switch (box[i][j]) {
-				case 1: // 토마토라면 넣기
-					q.add(new Tomato(i, j));
-				case -1: // 빈공간이라면 칸만 까, 토마토일때도 까
-					--empty;
-					break;
+				box[i][j] = Integer.parseInt(st.nextToken());
+				if (box[i][j] == 1) {
+					q.add(new Tomato(i, j, 0)); // 익은토마토 넣기
+					visited[i][j] = true;
 				}
 			}
-		}// 입력 완
-		int days = 0;
-		
-		while(!q.isEmpty() && empty!=0) {
-			
+		} // 입력완
+		int ans = 0;
+
+		while (!q.isEmpty()) {
+			Tomato curr = q.poll();
+			ans = curr.day;
+			for (int i = 0; i < 4; i++) {
+				int nr = curr.r + dr[i];
+				int nc = curr.c + dc[i];
+
+				if (nr < 0 || nr >= N || nc < 0 || nc >= M)
+					continue;
+				if (box[nr][nc] != 0 || visited[nr][nc])
+					continue;
+
+				// 토마토 익고
+				box[nr][nc] = 1;
+				q.add(new Tomato(nr, nc, curr.day + 1));
+				visited[nr][nc] = true;
+			}
 		}
+
+		outer: for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if (box[i][j] == 0) {
+					ans = -1;
+					break outer;
+				}
+
+			}
+		}
+		System.out.println(ans);
 	}
 
 }
