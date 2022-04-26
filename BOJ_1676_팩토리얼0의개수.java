@@ -14,6 +14,7 @@ public class BOJ_1676_팩토리얼0의개수 {
 
 		for (int i = 1; i <= n; i++) {
 			int tmp = i;
+			// 5의 거듭제곱 고려해줌
 			while (tmp % 5 == 0) {
 				cnt++;
 				tmp = tmp / 5;
