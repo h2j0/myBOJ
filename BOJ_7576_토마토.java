@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BOJ_토마토 {
+public class BOJ_7576_토마토 {
 
 	static class Tomato {
 		int r;
